@@ -1,0 +1,5 @@
+name: DropTime
+main: com.nuclearw.droptime.DropTime
+version: ${project.version}
+author: NuclearW
+description: DropTime lets you time how long player item drops should last

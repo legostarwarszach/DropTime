@@ -1,0 +1,7 @@
+== DropTime
+
+DropTime lets you time how long player item drops should last
+
+=== Compiling
+
+Maven 3 is required to compile DropTime
