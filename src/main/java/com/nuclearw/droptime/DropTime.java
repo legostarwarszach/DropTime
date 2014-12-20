@@ -19,6 +19,7 @@ public class DropTime extends JavaPlugin {
 
 		BukkitScheduler bs = getServer().getScheduler();
 		bs.scheduleSyncRepeatingTask(this, new ItemRemoverTask(this), 0L, 20L);
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new ItemListener());
 
 		PluginManager manager = getServer().getPluginManager();
 		manager.registerEvents(new ItemListener(this), this);
