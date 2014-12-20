@@ -2,6 +2,10 @@ package com.nuclearw.droptime.listeners;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
@@ -14,18 +18,25 @@ import org.bukkit.inventory.ItemStack;
 import com.nuclearw.droptime.Config;
 import com.nuclearw.droptime.DropTime;
 
-public class ItemListener implements Listener {
+public class ItemListener implements Listener, Runnable {
 	private DropTime plugin;
 
 	public ItemListener(DropTime plugin) {
 		this.plugin = plugin;
 	}
 
-	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
-		for(ItemStack drop : event.getDrops()) {
-			plugin.items.put(drop, Config.persistSeconds);
+	@Override
+	public void run() {
+		for (World world : Bukkit.getWorlds()) {
+			for (Chunk chunk : world.getLoadedChunks()) {
+				for (Entity item : chunk.getEntities()) {
+					if (item instanceof Item) {
+						plugin.items.put(item, Config.persistSeconds);
+					}
+				}
+			}
 		}
+
 	}
 
 	@EventHandler
